@@ -1,23 +1,179 @@
-('Happy ✨')
-<!
-<htm1 lang="en">
+<!DOCTYPE html>
+<html lang="es">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SERVICIO AUTOMOTRIZ</title>
+
+    <!-- Estilos de la pagina -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f4f4;
+        }
+
+        header {
+            background: #111;
+            color: white;
+            padding: 35px;
+            text-align: center;
+        }
+
+        nav {
+            background: #333;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: orange;
+        }
+
+        .container {
+            padding: 100px;
+        }
+
+        ul {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            list-style: none;
+        }
+
+        ul li {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        img, video {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .card {
+            width: 300px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .card img {
+            width: 100%;
+        }
+
+        .card p {
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        .servicios {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 400px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .servicios li {
+            list-style: none;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+        }
+
+        .servicios li:last-child {
+            border-bottom: none;
+        }
+
+        .servicios li:hover {
+            background: #f9f9f9;
+            color: orange;
+            cursor: pointer;
+        }
+
+    </style>
 </head>
+
+<!-- informacion de la pagina y funciones -->
 <body>
-<UL>
-    <li>LLANTAS</li>    <li>ACEITE</li>    <li> ALINEACION</li>
-</UL>
 
-<a href="assets/pages/informacion.html">INFORMACION</a>
+<header>
+    <h1>🚗 RedLine Automotive 🚗</h1>
+</header>
 
-<a href="assets/Pages/productos.html">PRODUCTOS</a>
+<nav>
 
-<a href="assets/Pages/servicio.html">SERVICIO</a>
+    <a href="assets/pages/informacion.html">INFORMACIÓN</a>
+    <a href="assets/pages/productos.html">SERVICIOS</a>
+    <a href="assets/pages/servicio.html">CONTACTANOS</a>
+</nav>
+
+
+<h1 style="text-align: center; color:black;">TU VEHICULO EN LAS MEJORES MANOS</h1>
+
+<hr>
+
+<div class="container">
+
+    <h2>SERVICIOS</h2>
+
+    <ul class="servicios">
+        <li>
+            LLANTAS
+        <p>Venta e instalación de llantas de alta calidad.</p>
+        </li>
+
+        <li>MECÁNICA
+        <p>Reparación general de motores y sistemas.</p>
+        </li>
+
+        <li>SCANNER
+        <p>Diagnóstico computarizado del vehículo.</p>
+        </li>
+
+        <li>CAMBIO DE ACEITES
+        <p>Cambio de aceite y mantenimiento preventivo.</p>
+        </li>
+
+        <li>ALINEACIÓN
+        <p>Alineación y balanceo profesional.</p>
+        </li>
+    </ul>
+
+    <hr>
+
+    <h2>IMAGEN</h2>
+    <img src="\assets/img/pexels-bertellifotografia-9702321.jpg" alt="Auto">
+
+    <h2>VIDEO</h2>
+    <video controls>
+        <source src="\assets/video/14228180-hd_1920_1080_60fps.mp4" type="video/mp4">
+    </video>
+
+    <hr>
+
+    <h2>TARJETAS</h2>
+
+    <div class="card">
+        <img src="\assets/img/pexels-egeardaphotos-2148533277-34054740.jpg" alt="Taller">
+        <p>TALLER AUTOMOTRIZ</p>
+    </div>
+
+</div>
 
 </body>
-</htm1>
-
+</html>

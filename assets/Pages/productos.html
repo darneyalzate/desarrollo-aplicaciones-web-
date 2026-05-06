@@ -1,17 +1,126 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <title>PRODUCTOS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - Servicio Automotriz</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f4f4;
+        }
+
+        header {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        nav {
+            background: #333;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: orange;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .productos {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            width: 250px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .card img {
+            width: 100%;
+        }
+
+        .card-content {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .precio {
+            color: green;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
 </head>
+
 <body>
 
-<a href="/index.html">INICIO</a>
+<header>
+    <h1>🚗 RedLine Automotive 🚗</h1>
+</header>
 
-<a href="informacion.html">INFORMACION</a>
+<nav>
+    <a href="../../index.html">INICIO</a>
+    <a href="informacion.html">INFORMACIÓN</a>
+    <a href="productos.html">SERVICIOS</a>
+    <a href="servicio.html">CONTACTANOS</a>
+</nav>
 
+<div class="container">
 
-<a href="servicio.html">SERVICIO</a>
+    <h2>Productos disponibles</h2>
+
+    <div class="productos">
+
+        <div class="card">
+            <img src="\assets\Img\aceite.png" alt="Aceite">
+            <div class="card-content">
+                <h3>Aceite Motor</h3>
+                <p>Alta calidad para todo tipo de vehículo</p>
+                <p class="precio"> desde: $180.000 </p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="\assets\Img\llantas.png" alt="Llantas">
+            <div class="card-content">
+                <h3>Llantas</h3>
+                <p>Gran Agarre y Durabilidad</p>
+                <p class="precio"> desde: $650.000 </p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="\assets\Img\frenos.png" alt="Frenos">
+            <div class="card-content">
+                <h3>Pastillas de freno</h3>
+                <p>Seguridad garantizada</p>
+                <p class="precio">desde: $ 120.000 </p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
 
 </body>
 </html>
