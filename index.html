@@ -1,179 +1,500 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SERVICIO AUTOMOTRIZ</title>
-
-    <!-- Estilos de la pagina -->
+    <title>RedLine Automotive</title>
     <style>
+        /* ============================================================
+           style.css — RedLine Automotive
+           Metodología BEM (Block__Element--Modifier)
+           ============================================================ */
+
+        /* ---------- Variables ---------- */
+        :root {
+            --color-dark:    #111111;
+            --color-nav:     #333333;
+            --color-accent:  orange;
+            --color-bg:      #f4f4f4;
+            --color-white:   #ffffff;
+            --color-border:  #dddddd;
+            --color-shadow:  rgba(0, 0, 0, 0.2);
+            --color-green:   green;
+            --radius-sm:     5px;
+            --radius-md:     10px;
+            --radius-lg:     15px;
+            --font-base:     Arial, sans-serif;
+        }
+
+        /* ---------- Reset ---------- */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: var(--font-base);
             margin: 0;
-            background: #f4f4f4;
+            background: var(--color-bg);
+            color: var(--color-dark);
         }
 
-        header {
-            background: #111;
-            color: white;
+        /* ============================================================
+           BLOQUE: header
+           ============================================================ */
+        .header {
+            background: var(--color-dark);
+            color: var(--color-white);
+            text-align: center;
             padding: 35px;
-            text-align: center;
+            border-bottom: 3px solid var(--color-accent);
         }
 
-        nav {
-            background: #333;
-            padding: 20px;
-            text-align: center;
+        .header__title {
+            margin: 0;
+            font-size: 1.8rem;
         }
 
-        nav a {
-            color: white;
-            margin: 0 15px;
+        /* ============================================================
+           BLOQUE: nav
+           ============================================================ */
+        .nav {
+            background: var(--color-nav);
+            padding: 0;
+            position: relative;
+        }
+
+        .nav__inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            min-height: 52px;
+            position: relative;
+        }
+
+        .nav__brand {
+            display: none;
+            color: var(--color-white);
             text-decoration: none;
             font-weight: bold;
+            font-size: 1rem;
         }
 
-        nav a:hover {
-            color: orange;
-        }
-
-        .container {
-            padding: 100px;
-        }
-
-        ul {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
+        .nav__list {
+            display: flex;
             list-style: none;
+            margin: 0;
+            padding: 0;
         }
 
-        ul li {
-            padding: 8px;
-            border-bottom: 1px solid #ddd;
-        }
+        .nav__item {}
 
-        img, video {
-            width: 100%;
-            max-width: 500px;
-            border-radius: 10px;
-            margin-top: 10px;
-        }
-
-        .card {
-            width: 300px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
-            overflow: hidden;
-            margin-top: 20px;
-        }
-
-        .card img {
-            width: 100%;
-        }
-
-        .card p {
-            text-align: center;
-            padding: 10px;
+        .nav__link {
+            display: block;
+            color: var(--color-white);
+            text-decoration: none;
             font-weight: bold;
+            padding: 16px 15px;
+            transition: color 0.2s;
         }
 
+        .nav__link:hover,
+        .nav__link--active {
+            color: var(--color-accent);
+        }
+
+        /* ---------- Botón hamburguesa ---------- */
+        .nav__toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            width: 40px;
+            height: 40px;
+        }
+
+        .nav__toggle-bar {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--color-white);
+            border-radius: 2px;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .nav--open .nav__toggle-bar:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .nav--open .nav__toggle-bar:nth-child(2) {
+            opacity: 0;
+        }
+        .nav--open .nav__toggle-bar:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* ---------- Responsive: móvil ---------- */
+        @media (max-width: 768px) {
+            .nav__inner {
+                justify-content: space-between;
+                flex-wrap: wrap;
+            }
+
+            .nav__brand {
+                display: block;
+            }
+
+            .nav__toggle {
+                display: flex;
+            }
+
+            .nav__list {
+                flex-direction: column;
+                width: 100%;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.35s ease;
+                order: 3;
+                flex-basis: 100%;
+            }
+
+            .nav--open .nav__list {
+                max-height: 400px;
+            }
+
+            .nav__link {
+                padding: 14px 20px;
+                border-top: 1px solid rgba(255, 255, 255, 0.08);
+                text-align: left;
+            }
+        }
+
+        /* ============================================================
+           BLOQUE: container
+           ============================================================ */
+        .container {
+            padding: 40px 100px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 16px;
+            }
+        }
+
+        /* ============================================================
+           BLOQUE: page-title
+           ============================================================ */
+        .page-title {
+            text-align: center;
+            color: var(--color-dark);
+            padding: 20px 16px;
+        }
+
+        .container h2 {
+            color: var(--color-dark);
+        }
+
+        /* ============================================================
+           BLOQUE: divider
+           ============================================================ */
+        .divider {
+            border: none;
+            border-top: 1px solid var(--color-border);
+            margin: 20px 0;
+        }
+
+        /* ============================================================
+           BLOQUE: servicios
+           ============================================================ */
         .servicios {
-            background: white;
-            border-radius: 12px;
+            background: var(--color-white);
+            border-radius: var(--radius-md);
             padding: 20px;
             max-width: 400px;
-            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
-        }
-
-        .servicios li {
+            box-shadow: 0 4px 10px var(--color-shadow);
             list-style: none;
-            padding: 12px;
-            border-bottom: 1px solid #ddd;
-            font-weight: bold;
+            margin: 0;
         }
 
-        .servicios li:last-child {
+        .servicios__item {
+            padding: 12px;
+            border-bottom: 1px solid var(--color-border);
+            font-weight: bold;
+            color: var(--color-dark);
+        }
+
+        .servicios__item:last-child {
             border-bottom: none;
         }
 
-        .servicios li:hover {
+        .servicios__item:hover {
             background: #f9f9f9;
-            color: orange;
+            color: var(--color-accent);
             cursor: pointer;
         }
 
+        .servicios__descripcion {
+            font-weight: normal;
+            margin: 4px 0 0;
+            font-size: 0.9rem;
+            color: var(--color-dark);
+        }
+
+        /* ============================================================
+           BLOQUE: card
+           ============================================================ */
+        .card {
+            background: var(--color-white);
+            border-radius: var(--radius-md);
+            box-shadow: 0 4px 10px var(--color-shadow);
+            overflow: hidden;
+            margin-top: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px var(--color-shadow);
+        }
+
+        .card--sm      { width: 180px; }
+        .card--product { width: 180px; }
+
+        .card__image {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card__body {
+            padding: 10px 12px;
+            text-align: center;
+        }
+
+        .card__label {
+            font-weight: bold;
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--color-dark);
+        }
+
+        .card p {
+            color: var(--color-dark);
+        }
+
+        .card__price {
+            color: var(--color-green);
+            font-weight: bold;
+            margin-top: 6px;
+            font-size: 0.85rem;
+        }
+
+        /* ============================================================
+           BLOQUE: productos
+           ============================================================ */
+        .productos {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* ============================================================
+           BLOQUE: info-card
+           ============================================================ */
+        .info-card {
+            background: var(--color-white);
+            padding: 20px;
+            border-radius: var(--radius-md);
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px var(--color-shadow);
+            color: var(--color-dark);
+        }
+
+        .info-card__title {
+            color: var(--color-dark);
+            margin-top: 0;
+        }
+
+        /* ============================================================
+           BLOQUE: media-card
+           ============================================================ */
+        .media-card {
+            display: inline-block;
+            background: var(--color-white);
+            border-radius: var(--radius-md);
+            box-shadow: 0 4px 10px var(--color-shadow);
+            overflow: hidden;
+            margin-top: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .media-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px var(--color-shadow);
+        }
+
+        .media {
+            width: 220px;
+            height: 150px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ============================================================
+           BLOQUE: form
+           ============================================================ */
+        .form {
+            background: var(--color-white);
+            padding: 20px;
+            border-radius: var(--radius-md);
+            max-width: 400px;
+            box-shadow: 0 4px 10px var(--color-shadow);
+        }
+
+        .form__group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 12px;
+        }
+
+        .form__label {
+            font-weight: bold;
+            margin-bottom: 4px;
+            color: var(--color-dark);
+        }
+
+        .form__input,
+        .form__textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: var(--radius-sm);
+            border: 1px solid #ccc;
+            font-family: var(--font-base);
+            font-size: 1rem;
+            color: var(--color-dark);
+            background: var(--color-white);
+        }
+
+        .form__textarea {
+            resize: vertical;
+        }
+
+        .form__submit {
+            width: 100%;
+            padding: 10px;
+            background: var(--color-dark);
+            color: var(--color-white);
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+
+        .form__submit:hover {
+            background: var(--color-accent);
+            color: var(--color-dark);
+        }
+
+        /* ============================================================
+           BLOQUE: grid-cols
+           ============================================================ */
+        .grid-cols {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        .grid-cols__col {
+            flex: 1 1 200px;
+            padding: 16px;
+            color: white;
+        }
+
+        .grid-cols__col--violet { background-color: blueviolet; }
+        .grid-cols__col--dark   { background-color: #2a2a4e; }
+        .grid-cols__col--gray   { background-color: #333333; }
+
     </style>
 </head>
-
-<!-- informacion de la pagina y funciones -->
 <body>
 
-<header>
-    <h1>🚗 RedLine Automotive 🚗</h1>
+<header class="header">
+    <h1 class="header__title">🚗 RedLine Automotive 🚗</h1>
 </header>
 
-<nav>
-
-    <a href="assets/pages/informacion.html">INFORMACIÓN</a>
-    <a href="assets/pages/productos.html">SERVICIOS</a>
-    <a href="assets/pages/servicio.html">CONTACTANOS</a>
+<nav class="nav" id="mainNav">
+    <div class="nav__inner">
+        <a class="nav__brand" href="#">RedLine</a>
+        <button class="nav__toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+            <span class="nav__toggle-bar"></span>
+            <span class="nav__toggle-bar"></span>
+            <span class="nav__toggle-bar"></span>
+        </button>
+        <ul class="nav__list">
+            <li class="nav__item"><a class="nav__link nav__link--active" href="index.html">INICIO</a></li>
+            <li class="nav__item"><a class="nav__link" href="assets/Pages/informacion.html">INFORMACIÓN</a></li>
+            <li class="nav__item"><a class="nav__link" href="assets/Pages/productos.html">SERVICIOS</a></li>
+            <li class="nav__item"><a class="nav__link" href="assets/Pages/servicio.html">CONTÁCTENOS</a></li>
+        </ul>
+    </div>
 </nav>
 
-
-<h1 style="text-align: center; color:black;">TU VEHICULO EN LAS MEJORES MANOS</h1>
-
-<hr>
+<h1 class="page-title">TU VEHÍCULO EN LAS MEJORES MANOS</h1>
+<hr class="divider">
 
 <div class="container">
 
-    <h2>SERVICIOS</h2>
-
+    <h2>NUESTROS SERVICIOS</h2>
     <ul class="servicios">
-        <li>
-            LLANTAS
-        <p>Venta e instalación de llantas de alta calidad.</p>
-        </li>
-
-        <li>MECÁNICA
-        <p>Reparación general de motores y sistemas.</p>
-        </li>
-
-        <li>SCANNER
-        <p>Diagnóstico computarizado del vehículo.</p>
-        </li>
-
-        <li>CAMBIO DE ACEITES
-        <p>Cambio de aceite y mantenimiento preventivo.</p>
-        </li>
-
-        <li>ALINEACIÓN
-        <p>Alineación y balanceo profesional.</p>
-        </li>
+        <li class="servicios__item">LLANTAS<p class="servicios__descripcion">Venta e instalación de llantas de alta calidad.</p></li>
+        <li class="servicios__item">MECÁNICA<p class="servicios__descripcion">Reparación general de motores y sistemas.</p></li>
+        <li class="servicios__item">SCANNER<p class="servicios__descripcion">Diagnóstico computarizado del vehículo.</p></li>
+        <li class="servicios__item">CAMBIO DE ACEITES<p class="servicios__descripcion">Cambio de aceite y mantenimiento preventivo.</p></li>
+        <li class="servicios__item">ALINEACIÓN<p class="servicios__descripcion">Alineación y balanceo profesional.</p></li>
     </ul>
 
-    <hr>
+    <hr class="divider">
 
     <h2>IMAGEN</h2>
-    <img src="\assets/img/pexels-bertellifotografia-9702321.jpg" alt="Auto">
+    <div class="media-card">
+        <img class="media" src="assets/Img/pexels-bertellifotografia-9702321.jpg" alt="Auto">
+    </div>
 
     <h2>VIDEO</h2>
-    <video controls>
-        <source src="\assets/video/14228180-hd_1920_1080_60fps.mp4" type="video/mp4">
-    </video>
+    <div class="media-card">
+        <video class="media" controls>
+            <source src="assets/Video/14228180-hd_1920_1080_60fps.mp4" type="video/mp4">
+        </video>
+    </div>
 
-    <hr>
+    <hr class="divider">
 
     <h2>TARJETAS</h2>
-
-    <div class="card">
-        <img src="\assets/img/pexels-egeardaphotos-2148533277-34054740.jpg" alt="Taller">
-        <p>TALLER AUTOMOTRIZ</p>
+    <div class="card card--sm">
+        <img class="card__image" src="assets/Img/pexels-egeardaphotos-2148533277-34054740.jpg" alt="Taller">
+        <div class="card__body">
+            <p class="card__label">TALLER AUTOMOTRIZ</p>
+        </div>
     </div>
 
 </div>
 
+<script>
+    const toggle = document.getElementById("navToggle");
+    const nav    = document.getElementById("mainNav");
+    toggle.addEventListener("click", function () {
+        const isOpen = nav.classList.toggle("nav--open");
+        toggle.setAttribute("aria-expanded", isOpen);
+    });
+</script>
 </body>
 </html>

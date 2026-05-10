@@ -1,126 +1,638 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos - Servicio Automotriz</title>
-
+    <title>Servicios - RedLine Automotive</title>
     <style>
+        /* ============================================================
+           style.css — RedLine Automotive
+           Metodología BEM (Block__Element--Modifier)
+           ============================================================ */
+
+        /* ---------- Variables ---------- */
+        :root {
+            --color-dark:    #111111;
+            --color-nav:     #333333;
+            --color-accent:  orange;
+            --color-bg:      #f4f4f4;
+            --color-white:   #ffffff;
+            --color-border:  #dddddd;
+            --color-shadow:  rgba(0, 0, 0, 0.2);
+            --color-green:   green;
+            --radius-sm:     5px;
+            --radius-md:     10px;
+            --radius-lg:     15px;
+            --font-base:     Arial, sans-serif;
+        }
+
+        /* ---------- Reset ---------- */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: var(--font-base);
             margin: 0;
-            background: #f4f4f4;
+            background: var(--color-bg);
+            color: var(--color-dark);
         }
 
-        header {
-            background: #111;
-            color: white;
+        /* ============================================================
+           BLOQUE: header
+           ============================================================ */
+        .header {
+            background: var(--color-dark);
+            color: var(--color-white);
             text-align: center;
-            padding: 15px;
+            padding: 35px;
+            border-bottom: 3px solid var(--color-accent);
         }
 
-        nav {
-            background: #333;
-            padding: 10px;
-            text-align: center;
+        .header__title {
+            margin: 0;
+            font-size: 1.8rem;
         }
 
-        nav a {
-            color: white;
-            margin: 0 15px;
+        /* ============================================================
+           BLOQUE: nav
+           ============================================================ */
+        .nav {
+            background: var(--color-nav);
+            padding: 0;
+            position: relative;
+        }
+
+        .nav__inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            min-height: 52px;
+            position: relative;
+        }
+
+        .nav__brand {
+            display: none;
+            color: var(--color-white);
             text-decoration: none;
             font-weight: bold;
+            font-size: 1rem;
         }
 
-        nav a:hover {
-            color: orange;
+        .nav__list {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
         }
 
+        .nav__item {}
+
+        .nav__link {
+            display: block;
+            color: var(--color-white);
+            text-decoration: none;
+            font-weight: bold;
+            padding: 16px 15px;
+            transition: color 0.2s;
+        }
+
+        .nav__link:hover,
+        .nav__link--active {
+            color: var(--color-accent);
+        }
+
+        /* ---------- Botón hamburguesa ---------- */
+        .nav__toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            width: 40px;
+            height: 40px;
+        }
+
+        .nav__toggle-bar {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--color-white);
+            border-radius: 2px;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .nav--open .nav__toggle-bar:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .nav--open .nav__toggle-bar:nth-child(2) {
+            opacity: 0;
+        }
+        .nav--open .nav__toggle-bar:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* ---------- Responsive: móvil ---------- */
+        @media (max-width: 768px) {
+            .nav__inner {
+                justify-content: space-between;
+                flex-wrap: wrap;
+            }
+
+            .nav__brand {
+                display: block;
+            }
+
+            .nav__toggle {
+                display: flex;
+            }
+
+            .nav__list {
+                flex-direction: column;
+                width: 100%;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.35s ease;
+                order: 3;
+                flex-basis: 100%;
+            }
+
+            .nav--open .nav__list {
+                max-height: 400px;
+            }
+
+            .nav__link {
+                padding: 14px 20px;
+                border-top: 1px solid rgba(255, 255, 255, 0.08);
+                text-align: left;
+            }
+        }
+
+        /* ============================================================
+           BLOQUE: container
+           ============================================================ */
         .container {
-            padding: 20px;
+            padding: 40px 100px;
         }
 
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 16px;
+            }
+        }
+
+        /* ============================================================
+           BLOQUE: page-title
+           ============================================================ */
+        .page-title {
+            text-align: center;
+            color: var(--color-dark);
+            padding: 20px 16px;
+        }
+
+        .container h2 {
+            color: var(--color-dark);
+        }
+
+        /* ============================================================
+           BLOQUE: divider
+           ============================================================ */
+        .divider {
+            border: none;
+            border-top: 1px solid var(--color-border);
+            margin: 20px 0;
+        }
+
+        /* ============================================================
+           BLOQUE: servicios
+           ============================================================ */
+        .servicios {
+            background: var(--color-white);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            max-width: 400px;
+            box-shadow: 0 4px 10px var(--color-shadow);
+            list-style: none;
+            margin: 0;
+        }
+
+        .servicios__item {
+            padding: 12px;
+            border-bottom: 1px solid var(--color-border);
+            font-weight: bold;
+            color: var(--color-dark);
+        }
+
+        .servicios__item:last-child {
+            border-bottom: none;
+        }
+
+        .servicios__item:hover {
+            background: #f9f9f9;
+            color: var(--color-accent);
+            cursor: pointer;
+        }
+
+        .servicios__descripcion {
+            font-weight: normal;
+            margin: 4px 0 0;
+            font-size: 0.9rem;
+            color: var(--color-dark);
+        }
+
+        /* ============================================================
+           BLOQUE: card
+           ============================================================ */
+        .card {
+            background: var(--color-white);
+            border-radius: var(--radius-md);
+            box-shadow: 0 4px 10px var(--color-shadow);
+            overflow: hidden;
+            margin-top: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px var(--color-shadow);
+        }
+
+        .card--sm      { width: 180px; }
+        .card--product { width: 180px; }
+
+        .card__image {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card__body {
+            padding: 10px 12px;
+            text-align: center;
+        }
+
+        .card__label {
+            font-weight: bold;
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--color-dark);
+        }
+
+        .card p {
+            color: var(--color-dark);
+        }
+
+        .card__price {
+            color: var(--color-green);
+            font-weight: bold;
+            margin-top: 6px;
+            font-size: 0.85rem;
+        }
+
+        /* ============================================================
+           BLOQUE: productos
+           ============================================================ */
         .productos {
             display: flex;
-            gap: 20px;
+            gap: 16px;
             flex-wrap: wrap;
         }
 
-        .card {
-            width: 250px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+        /* ============================================================
+           BLOQUE: info-card
+           ============================================================ */
+        .info-card {
+            background: var(--color-white);
+            padding: 20px;
+            border-radius: var(--radius-md);
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px var(--color-shadow);
+            color: var(--color-dark);
+        }
+
+        .info-card__title {
+            color: var(--color-dark);
+            margin-top: 0;
+        }
+
+        /* ============================================================
+           BLOQUE: media-card
+           ============================================================ */
+        .media-card {
+            display: inline-block;
+            background: var(--color-white);
+            border-radius: var(--radius-md);
+            box-shadow: 0 4px 10px var(--color-shadow);
             overflow: hidden;
+            margin-top: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .card img {
+        .media-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px var(--color-shadow);
+        }
+
+        .media {
+            width: 220px;
+            height: 150px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ============================================================
+           BLOQUE: form
+           ============================================================ */
+        .form {
+            background: var(--color-white);
+            padding: 20px;
+            border-radius: var(--radius-md);
+            max-width: 400px;
+            box-shadow: 0 4px 10px var(--color-shadow);
+        }
+
+        .form__group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 12px;
+        }
+
+        .form__label {
+            font-weight: bold;
+            margin-bottom: 4px;
+            color: var(--color-dark);
+        }
+
+        .form__input,
+        .form__textarea {
             width: 100%;
+            padding: 10px;
+            border-radius: var(--radius-sm);
+            border: 1px solid #ccc;
+            font-family: var(--font-base);
+            font-size: 1rem;
+            color: var(--color-dark);
+            background: var(--color-white);
         }
 
-        .card-content {
-            padding: 15px;
-            text-align: center;
+        .form__textarea {
+            resize: vertical;
         }
 
-        .precio {
-            color: green;
+        .form__submit {
+            width: 100%;
+            padding: 10px;
+            background: var(--color-dark);
+            color: var(--color-white);
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 1rem;
             font-weight: bold;
             margin-top: 10px;
+            transition: background 0.2s;
         }
+
+        .form__submit:hover {
+            background: var(--color-accent);
+            color: var(--color-dark);
+        }
+
+        /* ============================================================
+           BLOQUE: grid-cols
+           ============================================================ */
+        .grid-cols {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        .grid-cols__col {
+            flex: 1 1 200px;
+            padding: 16px;
+            color: white;
+        }
+
+        .grid-cols__col--violet { background-color: blueviolet; }
+        .grid-cols__col--dark   { background-color: #2a2a4e; }
+        .grid-cols__col--gray   { background-color: #333333; }
+
     </style>
 </head>
-
 <body>
 
-<header>
-    <h1>🚗 RedLine Automotive 🚗</h1>
+<header class="header">
+    <h1 class="header__title">🚗 RedLine Automotive 🚗</h1>
 </header>
 
-<nav>
-    <a href="../../index.html">INICIO</a>
-    <a href="informacion.html">INFORMACIÓN</a>
-    <a href="productos.html">SERVICIOS</a>
-    <a href="servicio.html">CONTACTANOS</a>
+<nav class="nav" id="mainNav">
+    <div class="nav__inner">
+        <a class="nav__brand" href="../../index.html">RedLine</a>
+        <button class="nav__toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+            <span class="nav__toggle-bar"></span>
+            <span class="nav__toggle-bar"></span>
+            <span class="nav__toggle-bar"></span>
+        </button>
+        <ul class="nav__list">
+            <li class="nav__item"><a class="nav__link" href="../../index.html">INICIO</a></li>
+            <li class="nav__item"><a class="nav__link" href="informacion.html">INFORMACIÓN</a></li>
+            <li class="nav__item"><a class="nav__link nav__link--active" href="productos.html">SERVICIOS</a></li>
+            <li class="nav__item"><a class="nav__link" href="servicio.html">CONTÁCTANOS</a></li>
+        </ul>
+    </div>
 </nav>
 
 <div class="container">
 
-    <h2>Productos disponibles</h2>
-
+    <!-- ── LUBRICANTES Y FLUIDOS ─────────────────────────────── -->
+    <h2>Lubricantes y Fluidos</h2>
     <div class="productos">
 
-        <div class="card">
-            <img src="\assets\Img\aceite.png" alt="Aceite">
-            <div class="card-content">
-                <h3>Aceite Motor</h3>
+        <div class="card card--product">
+            <img class="card__image" src="../../assets/Img/aceite.png" alt="Aceite Motor">
+            <div class="card__body">
+                <h3 class="card__label">Aceite Motor</h3>
                 <p>Alta calidad para todo tipo de vehículo</p>
-                <p class="precio"> desde: $180.000 </p>
+                <p class="card__price">desde: $180.000</p>
             </div>
         </div>
 
-        <div class="card">
-            <img src="\assets\Img\llantas.png" alt="Llantas">
-            <div class="card-content">
-                <h3>Llantas</h3>
-                <p>Gran Agarre y Durabilidad</p>
-                <p class="precio"> desde: $650.000 </p>
+        <div class="card card--product">
+            <img class="card__image" src="../../assets/Img/aceite.png" alt="Aceite de Transmisión">
+            <div class="card__body">
+                <h3 class="card__label">Aceite de Transmisión</h3>
+                <p>Protección total para caja manual y automática</p>
+                <p class="card__price">desde: $95.000</p>
             </div>
         </div>
 
-        <div class="card">
-            <img src="\assets\Img\frenos.png" alt="Frenos">
-            <div class="card-content">
-                <h3>Pastillas de freno</h3>
-                <p>Seguridad garantizada</p>
-                <p class="precio">desde: $ 120.000 </p>
+        <div class="card card--product">
+            <img class="card__image" src="../../assets/Img/aceite.png" alt="Líquido de Frenos">
+            <div class="card__body">
+                <h3 class="card__label">Líquido de Frenos</h3>
+                <p>DOT 3 y DOT 4 disponibles</p>
+                <p class="card__price">desde: $35.000</p>
+            </div>
+        </div>
+
+        <div class="card card--product">
+            <img class="card__image" src="../../assets/Img/aceite.png" alt="Refrigerante">
+            <div class="card__body">
+                <h3 class="card__label">Refrigerante</h3>
+                <p>Evita el sobrecalentamiento del motor</p>
+                <p class="card__price">desde: $45.000</p>
             </div>
         </div>
 
     </div>
 
-</div>
+    <hr class="divider">
 
+    <!-- ── NEUMÁTICOS Y RINES ────────────────────────────────── -->
+    <h2>Neumáticos y Rines</h2>
+    <div class="productos">
+
+        <div class="card card--product">
+            <img class="card__image" src="../../assets/Img/llantas.png" alt="Llantas">
+            <div class="card__body">
+                <h3 class="card__label">Llantas</h3>
+                <p>Gran agarre y durabilidad</p>
+                <p class="card__price">desde: $650.000</p>
+            </div>
+        </div>
+
+        <div class="card card--product">
+            <img class="card__image" src="../../assets/Img/llantas.png" alt="Llantas Todo Terreno">
+            <div class="card__body">
+                <h3 class="card__label">Llantas Todo Terreno</h3>
+                <p>Máxima tracción en cualquier superficie</p>
+                <p class="card__price">desde: $850.000</p>
+            </div>
+        </div>
+
+        <div class="card card--product">
+            <img class="card__image" src="../../assets/Img/llantas.png" alt="Alineación y Balanceo">
+            <div class="card__body">
+                <h3 class="card__label">Alineación y Balanceo</h3>
+                <p>Prolonga la vida útil de tus llantas</p>
+                <p class="card__price">desde: $80.000</p>
+            </div>
+        </div>
+
+        <div class="card card--product">
+            <img class="card__image" src="../../assets/Img/llantas.png" alt="Rines">
+            <div class="card__body">
+                <h3 class="card__label">Rines Deportivos</h3>
+                <p>Aluminio de alta resistencia</p>
+                <p class="card__price">desde: $420.000</p>
+            </div>
+        </div>
+
+    </div>
+
+    <hr class="divider">
+
+    <!-- ── FRENOS Y SUSPENSIÓN ───────────────────────────────── -->
+    <h2>Frenos y Suspensión</h2>
+    <div class="productos">
+
+        <div class="card card--product">
+            <img class="card__image" src="../../assets/Img/frenos.png" alt="Pastillas de Freno">
+            <div class="card__body">
+                <h3 class="card__label">Pastillas de Freno</h3>
+                <p>Seguridad garantizada</p>
+                <p class="card__price">desde: $120.000</p>
+            </div>
+        </div>
+
+        <div class="card card--product">
+            <img class="card__image" src="../../assets/Img/frenos.png" alt="Discos de Freno">
+            <div class="card__body">
+                <h3 class="card__label">Discos de Freno</h3>
+                <p>Frenado preciso y sin vibración</p>
+                <p class="card__price">desde: $210.000</p>
+            </div>
+        </div>
+
+        <div class="card card--product">
+            <img class="card__image" src="../../assets/Img/frenos.png" alt="Amortiguadores">
+            <div class="card__body">
+                <h3 class="card__label">Amortiguadores</h3>
+                <p>Confort y estabilidad en cada curva</p>
+                <p class="card__price">desde: $280.000</p>
+            </div>
+        </div>
+
+        <div class="card card--product">
+            <img class="card__image" src="../../assets/Img/frenos.png" alt="Muelles">
+            <div class="card__body">
+                <h3 class="card__label">Muelles / Resortes</h3>
+                <p>Restaura la altura original del vehículo</p>
+                <p class="card__price">desde: $190.000</p>
+            </div>
+        </div>
+
+    </div>
+
+    <hr class="divider">
+
+    <!-- ── DIAGNÓSTICO Y ELECTRÓNICA ─────────────────────────── -->
+    <h2>Diagnóstico y Electrónica</h2>
+    <div class="productos">
+
+        <div class="card card--product">
+            <img class="card__image" src="../../assets/Img/frenos.png" alt="Scanner Automotriz">
+            <div class="card__body">
+                <h3 class="card__label">Scanner Automotriz</h3>
+                <p>Diagnóstico computarizado completo</p>
+                <p class="card__price">desde: $60.000</p>
+            </div>
+        </div>
+
+        <div class="card card--product">
+            <img class="card__image" src="../../assets/Img/frenos.png" alt="Revisión Eléctrica">
+            <div class="card__body">
+                <h3 class="card__label">Revisión Eléctrica</h3>
+                <p>Batería, alternador y sistema eléctrico</p>
+                <p class="card__price">desde: $50.000</p>
+            </div>
+        </div>
+
+        <div class="card card--product">
+            <img class="card__image" src="../../assets/Img/frenos.png" alt="Batería">
+            <div class="card__body">
+                <h3 class="card__label">Batería</h3>
+                <p>Instalación inmediata con garantía</p>
+                <p class="card__price">desde: $250.000</p>
+            </div>
+        </div>
+
+        <div class="card card--product">
+            <img class="card__image" src="../../assets/Img/frenos.png" alt="Luces LED">
+            <div class="card__body">
+                <h3 class="card__label">Kit Luces LED</h3>
+                <p>Mayor visibilidad y ahorro energético</p>
+                <p class="card__price">desde: $130.000</p>
+            </div>
+        </div>
+
+    </div>
+
+</div><!-- /.container -->
+
+<script>
+    const toggle = document.getElementById("navToggle");
+    const nav    = document.getElementById("mainNav");
+    toggle.addEventListener("click", function () {
+        const isOpen = nav.classList.toggle("nav--open");
+        toggle.setAttribute("aria-expanded", isOpen);
+    });
+</script>
 </body>
 </html>
