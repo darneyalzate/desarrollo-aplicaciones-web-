@@ -255,12 +255,12 @@ body {
     box-shadow: 0 8px 20px var(--color-shadow);
 }
 
-.card--sm      { width: 180px; }
-.card--product { width: 180px; }
+.card--sm      { width: 300px; }
+.card--product { width: 200px; }
 
 .card__image {
     width: 100%;
-    height: 130px;
+    height: 200px;
     object-fit: cover;
     display: block;
 }
@@ -333,10 +333,17 @@ body {
 }
 
 .media {
-    width: 220px;
-    height: 150px;
+    width: 480px;
+    height: 300px;
     object-fit: cover;
     display: block;
+}
+
+@media (max-width: 768px) {
+    .media {
+        width: 100%;
+        height: 220px;
+    }
 }
 
 /* ============================================================
@@ -415,3 +422,267 @@ body {
 .grid-cols__col--violet { background-color: blueviolet; }
 .grid-cols__col--dark   { background-color: #2a2a4e; }
 .grid-cols__col--gray   { background-color: #333333; }
+
+
+/* ============================================================
+   BLOQUE: servicios-grid  (tarjetas de servicios en index)
+   ============================================================ */
+.servicios-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.servicio-card {
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 12px var(--color-shadow);
+    padding: 24px 20px;
+    flex: 1 1 160px;
+    max-width: 200px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-top: 3px solid var(--color-accent);
+    cursor: default;
+}
+
+.servicio-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 24px var(--color-shadow);
+}
+
+.servicio-card__icon {
+    font-size: 2.4rem;
+    margin-bottom: 12px;
+    line-height: 1;
+}
+
+.servicio-card__title {
+    font-size: 0.82rem;
+    font-weight: bold;
+    color: var(--color-dark);
+    margin: 0 0 8px;
+    letter-spacing: 0.5px;
+}
+
+.servicio-card__desc {
+    font-size: 0.8rem;
+    color: #666;
+    margin: 0;
+    line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+    .servicio-card {
+        flex: 1 1 140px;
+        max-width: 100%;
+    }
+}
+
+
+/* ============================================================
+   Secciones IMAGEN, VIDEO y TARJETAS — centradas
+   ============================================================ */
+.media-section {
+    text-align: center;
+}
+
+.media-section .media-card {
+    display: inline-block;
+}
+
+.tarjetas-section {
+    text-align: center;
+}
+
+.tarjetas-section .card {
+    display: inline-block;
+    text-align: center;
+}
+/* ============================================================
+   PÁGINA CONTACTO — BEM
+   ============================================================ */
+
+/* Hero */
+.contact-hero {
+    background: var(--color-dark);
+    color: var(--color-white);
+    text-align: center;
+    padding: 48px 20px 40px;
+    border-bottom: 3px solid var(--color-accent);
+}
+
+.contact-hero__title {
+    margin: 0 0 8px;
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+
+.contact-hero__subtitle {
+    margin: 0;
+    color: #aaaaaa;
+    font-size: 1rem;
+}
+
+/* Layout dos columnas */
+.contact-layout {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+/* Columna info */
+.contact-info {
+    flex: 1 1 260px;
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 12px var(--color-shadow);
+    padding: 28px 24px;
+}
+
+.contact-info__title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--color-dark);
+    margin: 0 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--color-accent);
+}
+
+.contact-info__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.contact-info__icon {
+    width: 44px;
+    height: 44px;
+    background: var(--color-dark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.contact-info__icon--link {
+    cursor: pointer;
+}
+
+.contact-info__icon--link:hover {
+    transform: scale(1.15);
+    box-shadow: 0 4px 12px var(--color-shadow);
+}
+
+.contact-info__icon--whatsapp {
+    background: #25D366;
+}
+
+.contact-info__icon--whatsapp:hover {
+    background: #1ebe5d;
+}
+
+.contact-info__text strong {
+    display: block;
+    font-size: 0.78rem;
+    color: #888;
+    margin-bottom: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.contact-info__text span {
+    font-size: 0.95rem;
+    color: var(--color-dark);
+    font-weight: bold;
+}
+
+.contact-info__map-link,
+.contact-info__wa-link {
+    display: inline-block;
+    margin-top: 4px;
+    font-size: 0.82rem;
+    text-decoration: none;
+    font-weight: bold;
+    transition: opacity 0.2s;
+}
+
+.contact-info__map-link { color: var(--color-accent); }
+.contact-info__wa-link  { color: #25D366; }
+
+.contact-info__map-link:hover,
+.contact-info__wa-link:hover { opacity: 0.75; }
+
+/* Horarios */
+.contact-schedule {
+    background: var(--color-dark);
+    color: var(--color-white);
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    margin-top: 24px;
+}
+
+.contact-schedule__title {
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-accent);
+    margin: 0 0 12px;
+}
+
+.contact-schedule__row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.88rem;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.contact-schedule__row:last-child { border-bottom: none; }
+
+/* Columna formulario */
+.contact-form-wrapper {
+    flex: 1 1 340px;
+}
+
+.contact-form-wrapper .form {
+    max-width: 100%;
+    border-top: 3px solid var(--color-accent);
+}
+
+.contact-form-wrapper .form__title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--color-dark);
+    margin: 0 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.contact-form-wrapper .form__input:focus,
+.contact-form-wrapper .form__textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+}
+
+.contact-form-wrapper .form__submit {
+    background: var(--color-accent);
+    color: var(--color-dark);
+    letter-spacing: 1px;
+}
+
+.contact-form-wrapper .form__submit:hover {
+    opacity: 0.85;
+    background: var(--color-accent);
+}
+
+@media (max-width: 768px) {
+    .contact-hero__title  { font-size: 1.4rem; }
+    .contact-layout       { flex-direction: column; }
+}
